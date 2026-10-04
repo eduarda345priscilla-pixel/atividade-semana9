@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sneaker Store - Catálogo de Tênis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Sneaker Store</h1>
+  </header>
+
+  <main>
+    <!-- Área de Controles -->
+    <section class="controls">
+      <input type="text" id="search" placeholder="Buscar por modelo de tênis...">
+      
+      <select id="category">
+        <option value="Todas">Todas</option>
+      </select>
+
+      <button id="btnRender">Renderizar</button>
+    </section>
+
+    <!-- Lista de Tênis -->
+    <section id="product-list" class="grid-container"></section>
+
+    <!-- Detalhes do Tênis -->
+    <section id="product-details" class="details-box">
+      <p>Clique em "Ver detalhes" de um tênis para exibir suas informações aqui.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
