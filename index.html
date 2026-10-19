@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,28 +11,31 @@
 
   <header>
     <h1>Sneaker Store</h1>
+    <p>Encontre o tênis perfeito para você!</p>
   </header>
 
   <main>
-    <!-- Área de Controles -->
     <section class="controls">
-      <input type="text" id="search" placeholder="Buscar por modelo de tênis...">
-      
+
+      <input
+        type="text"
+        id="search"
+        placeholder="Buscar por modelo de tênis..."
+      >
+
       <select id="category">
         <option value="Todas">Todas</option>
       </select>
 
       <button id="btnRender">Renderizar</button>
+
     </section>
 
-    <section id="product-list" class="grid-container"></section>
-
-   
-    <section id="product-details" class="details-box">
-      <p>Clique em "Ver detalhes" de um tênis para exibir suas informações aqui.</p>
+    <section id="product-list" class="grid-container">
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="app.js"></script>
+
 </body>
 </html>
