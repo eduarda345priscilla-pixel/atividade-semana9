@@ -1,3 +1,4 @@
+
 const data = {
   produtos: [
     {
@@ -7,7 +8,22 @@ const data = {
       categoria: "Casual",
       imagem: "img/images.jpg",
       descricao: "O brilho vive no Nike Air Force 1 '07, o ícone do basquete que dá um toque moderno.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: true,
+     fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/images.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/air (2).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/air (1).jpg"
+  }
+]
     },
     {
       id: 2,
@@ -16,7 +32,22 @@ const data = {
       categoria: "Corrida",
       imagem: "img/adidas.jpg",
       descricao: "Experimente a energia épica com o novo Ultraboost Light, nosso Ultraboost mais leve de todos.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: false,
+      fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/adidas.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/adidas (2).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/adidas (1).jpg"
+  }
+]
     },
     {
       id: 3,
@@ -25,7 +56,22 @@ const data = {
       categoria: "Basquete",
       imagem: "img/jordan.jpg",
       descricao: "Estilo lendário inspirado na herança das quadras de basquete dos anos 80.",
-      emEstoque: false
+      emEstoque: false,
+      destaque: true,
+      fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/jordan.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/jordan (1).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/jordan (2).jpg"
+  }
+]
     },
     {
       id: 4,
@@ -34,7 +80,22 @@ const data = {
       categoria: "Casual",
       imagem: "img/pulma.jpg",
       descricao: "Design futurista-retro com silhueta arrojada e camadas de materiais premium.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: false,
+      fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/pulma.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/didas (1).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/didas (2).jpg"
+  }
+]
     },
     {
       id: 5,
@@ -43,7 +104,22 @@ const data = {
       categoria: "Corrida",
       imagem: "img/mizuno.jpg",
       descricao: "Máximo amortecimento com a tecnologia Wave para corridas de alta performance.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: false,
+     fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/mizuno.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/mizuno (1).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/mizuno (2).jpg"
+  }
+]
     },
     {
       id: 6,
@@ -52,7 +128,22 @@ const data = {
       categoria: "Basquete",
       imagem: "img/nikee.jpg",
       descricao: "Desenvolvido para agilidade, contenção e baixo perfil nas quadras de basquete.",
-      emEstoque: false
+      emEstoque: false,
+      destaque: false,
+     fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/nikee.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/nike (1).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/nike (2).jpg"
+  }
+]
     },
     {
       id: 7,
@@ -61,7 +152,22 @@ const data = {
       categoria: "Skate",
       imagem: "img/vans.jpg",
       descricao: "O clássico tênis de skate da Vans com a icônica listra lateral em couro.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: true,
+     fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/vans.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/vans (2).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/vans (1).jpg"
+  }
+]
     },
     {
       id: 8,
@@ -70,10 +176,28 @@ const data = {
       categoria: "Skate",
       imagem: "img/nike low.jpg",
       descricao: "Amortecimento e tração otimizados para a prática do skate e uso diário.",
-      emEstoque: true
+      emEstoque: true,
+      destaque: false,
+     fotos: [
+  {
+    titulo: "Vista lateral",
+    imagem: "img/nike low.jpg"
+  },
+  {
+    titulo: "Vista frontal",
+    imagem: "img/force (2).jpg"
+  },
+  {
+    titulo: "Detalhe do solado",
+    imagem: "img/force (1).jpg"
+  }
+]
     }
   ]
 };
+
+
+
 
 function formatPrice(preco) {
   return preco.toLocaleString("pt-BR", {
@@ -82,76 +206,194 @@ function formatPrice(preco) {
   });
 }
 
+
+
+function renderFeatured() {
+  const lista = document.getElementById("listaDestaques");
+  const indicadores = document.getElementById(
+    "indicadoresDestaques"
+  );
+
+  if (!lista || !indicadores) return;
+
+  const destaques = data.produtos.filter(function(produto) {
+    return produto.destaque === true;
+  });
+
+  lista.innerHTML = "";
+  indicadores.innerHTML = "";
+
+  if (destaques.length === 0) {
+    lista.innerHTML = `
+      <p class="p-4 text-center">
+        Nenhum tênis em destaque.
+      </p>
+    `;
+    return;
+  }
+
+  destaques.forEach(function(produto, index) {
+    const slide = document.createElement("div");
+
+    slide.className = "carousel-item";
+
+    if (index === 0) {
+      slide.classList.add("active");
+    }
+
+    slide.innerHTML = `
+      <div class="featured-layout">
+
+        <div class="featured-media">
+          <a href="detalhes.html?id=${produto.id}">
+            <img
+              src="${produto.imagem}"
+              alt="${produto.nome}"
+              class="featured-image">
+          </a>
+        </div>
+
+        <div class="featured-info">
+          <h3>${produto.nome}</h3>
+
+          <p>${produto.descricao}</p>
+
+          <div class="featured-price">
+            ${formatPrice(produto.preco)}
+          </div>
+
+          <a href="detalhes.html?id=${produto.id}"
+             class="btn btn-dark">
+            Ver detalhes
+          </a>
+        </div>
+
+      </div>
+    `;
+
+    lista.appendChild(slide);
+
+    const indicador = document.createElement("button");
+
+    indicador.type = "button";
+
+    indicador.setAttribute(
+      "data-bs-target",
+      "#destaquesCarousel"
+    );
+
+    indicador.setAttribute(
+      "data-bs-slide-to",
+      index
+    );
+
+    indicador.setAttribute(
+      "aria-label",
+      "Slide " + (index + 1)
+    );
+
+    if (index === 0) {
+      indicador.classList.add("active");
+      indicador.setAttribute("aria-current", "true");
+    }
+
+    indicadores.appendChild(indicador);
+  });
+}
+
+
+
+
 function createProductCard(produto) {
-  const card = document.createElement("div");
+  const coluna = document.createElement("div");
 
-  card.classList.add("card");
-  card.setAttribute("data-id", produto.id);
+  coluna.className = "col-12 col-sm-6 col-lg-3";
 
-  card.innerHTML = `
-    <a href="detalhes.html?id=${produto.id}">
-      <img src="${produto.imagem}" alt="${produto.nome}">
-    </a>
+  const status = produto.emEstoque
+    ? "Disponível"
+    : "Esgotado";
 
-    <h3 class="card-title">${produto.nome}</h3>
+  const classeStatus = produto.emEstoque
+    ? "stock-available"
+    : "stock-unavailable";
 
-    <p class="card-price">
-      ${formatPrice(produto.preco)}
-    </p>
+  coluna.innerHTML = `
+    <div class="card sneaker-card h-100">
 
-    <p>Categoria: ${produto.categoria}</p>
-
-    <div class="card-buttons">
-      <a href="detalhes.html?id=${produto.id}"
-         class="btn-details">
-        Ver detalhes
+      <a href="detalhes.html?id=${produto.id}">
+        <img
+          src="${produto.imagem}"
+          alt="${produto.nome}"
+          class="card-img-top product-image">
       </a>
 
-      <button class="btn-highlight">
-        Destacar
-      </button>
+      <div class="card-body d-flex flex-column">
+
+        <p class="product-category">
+          ${produto.categoria}
+        </p>
+
+        <h3 class="card-title">
+          ${produto.nome}
+        </h3>
+
+        <p class="card-price">
+          ${formatPrice(produto.preco)}
+        </p>
+
+        <p class="${classeStatus}">
+          ${status}
+        </p>
+
+        <a href="detalhes.html?id=${produto.id}"
+           class="btn btn-dark mt-auto">
+          Ver detalhes
+        </a>
+
+      </div>
+
     </div>
   `;
 
-  const btnHighlight = card.querySelector(".btn-highlight");
-
-  btnHighlight.addEventListener("click", function() {
-    card.classList.toggle("highlight");
-  });
-
-  return card;
+  return coluna;
 }
 
 
 function renderProducts(produtos) {
-  const productList = document.getElementById("product-list");
+  const lista = document.getElementById("product-list");
 
-  if (!productList) return;
+  if (!lista) return;
 
-  productList.innerHTML = "";
+  lista.innerHTML = "";
 
   if (produtos.length === 0) {
-    productList.innerHTML = "<p>Nenhum tênis encontrado.</p>";
+    lista.innerHTML = `
+      <p>Nenhum tênis encontrado.</p>
+    `;
     return;
   }
 
   produtos.forEach(function(produto) {
     const card = createProductCard(produto);
-    productList.appendChild(card);
+    lista.appendChild(card);
   });
 }
 
-function renderCategories() {
-  const categorySelect = document.getElementById("category");
 
-  if (!categorySelect) return;
+
+function renderCategories() {
+  const select = document.getElementById("category");
+
+  if (!select) return;
 
   const categorias = [
     "Todas",
-    ...new Set(data.produtos.map(p => p.categoria))
+    ...new Set(data.produtos.map(function(produto) {
+      return produto.categoria;
+    }))
   ];
 
-  categorySelect.innerHTML = "";
+  select.innerHTML = "";
 
   categorias.forEach(function(categoria) {
     const option = document.createElement("option");
@@ -159,78 +401,98 @@ function renderCategories() {
     option.value = categoria;
     option.textContent = categoria;
 
-    categorySelect.appendChild(option);
+    select.appendChild(option);
   });
 }
 
 
 function filterProducts() {
-  const searchInput = document.getElementById("search");
-  const categorySelect = document.getElementById("category");
+  const pesquisa = document.getElementById("search")
+    .value.toLowerCase();
 
-  const pesquisa = searchInput.value.toLowerCase();
-  const categoria = categorySelect.value;
+  const categoria = document.getElementById("category")
+    .value;
 
   return data.produtos.filter(function(produto) {
-    const correspondeNome = produto.nome
+    const nomeCorreto = produto.nome
       .toLowerCase()
       .includes(pesquisa);
 
-    const correspondeCategoria =
+    const categoriaCorreta =
       categoria === "Todas" ||
       produto.categoria === categoria;
 
-    return correspondeNome && correspondeCategoria;
+    return nomeCorreto && categoriaCorreta;
   });
 }
 
 
+
 function showProductDetails() {
-  const productDetails = document.getElementById("product-details");
+  const detalhes = document.getElementById(
+    "product-details"
+  );
 
-  if (!productDetails) return;
+  const galeria = document.getElementById(
+    "gallery-track"
+  );
 
-  const parametros = new URLSearchParams(window.location.search);
+  if (!detalhes || !galeria) return;
+
+  // Pegar ID da URL
+  const parametros = new URLSearchParams(
+    window.location.search
+  );
 
   const id = Number(parametros.get("id"));
 
- 
+  
   const produto = data.produtos.find(function(item) {
     return item.id === id;
   });
 
- 
   if (!produto) {
-    productDetails.innerHTML = `
+    detalhes.innerHTML = `
       <h2>Produto não encontrado!</h2>
-      <p>Verifique o produto selecionado.</p>
+      <p>Volte para a loja e escolha outro tênis.</p>
     `;
+
+    document.getElementById(
+      "product-photos"
+    ).style.display = "none";
+
     return;
   }
 
-  const statusEstoque = produto.emEstoque
+  const status = produto.emEstoque
     ? "Disponível no estoque"
     : "Produto esgotado";
 
-  const classeEstoque = produto.emEstoque
-    ? "text-success"
-    : "text-danger";
+  const classeStatus = produto.emEstoque
+    ? "stock-available"
+    : "stock-unavailable";
 
-  // Montar detalhes dinamicamente
-  productDetails.innerHTML = `
-    <div class="details-content">
+  detalhes.innerHTML = `
+    <div class="details-layout">
 
-      <img
-        src="${produto.imagem}"
-        alt="${produto.nome}"
-        class="details-image"
-      >
+      <div class="details-image-box">
+        <img
+          src="${produto.imagem}"
+          alt="${produto.nome}"
+          class="details-image">
+      </div>
 
       <div class="details-info">
+
         <h2>${produto.nome}</h2>
 
         <p class="card-price">
           ${formatPrice(produto.preco)}
+        </p>
+
+        <p>
+          <strong>Código:</strong>
+          ${produto.id}
         </p>
 
         <p>
@@ -240,54 +502,108 @@ function showProductDetails() {
 
         <p>
           <strong>Disponibilidade:</strong>
-          <span class="${classeEstoque}">
-            ${statusEstoque}
+          <span class="${classeStatus}">
+            ${status}
           </span>
         </p>
 
-        <p>
+        <p class="details-description">
           <strong>Descrição:</strong>
           ${produto.descricao}
         </p>
+
       </div>
 
     </div>
   `;
+
+  const fotos = produto.fotos || [];
+
+  galeria.innerHTML = "";
+
+  fotos.forEach(function(foto) {
+    const card = document.createElement("div");
+
+    card.className = "gallery-card";
+
+    card.innerHTML = `
+      <img
+        src="${foto.imagem}"
+        alt="${foto.titulo}"
+        class="gallery-image">
+
+      <div class="gallery-title">
+        ${foto.titulo}
+      </div>
+    `;
+
+    galeria.appendChild(card);
+  });
+
+  const anterior = document.getElementById("galleryPrev");
+  const proximo = document.getElementById("galleryNext");
+
+  if (anterior && proximo) {
+    anterior.disabled = fotos.length <= 1;
+    proximo.disabled = fotos.length <= 1;
+
+    anterior.addEventListener("click", function() {
+      galeria.scrollBy({
+        left: -300,
+        behavior: "smooth"
+      });
+    });
+
+    proximo.addEventListener("click", function() {
+      galeria.scrollBy({
+        left: 300,
+        behavior: "smooth"
+      });
+    });
+  }
 }
 
 
-function iniciarPagina() {
-  const productList = document.getElementById("product-list");
 
- 
-  if (productList) {
-    const searchInput = document.getElementById("search");
-    const categorySelect = document.getElementById("category");
-    const btnRender = document.getElementById("btnRender");
+function iniciarPagina() {
+
+  if (document.getElementById("product-list")) {
+
+    renderFeatured();
 
     renderCategories();
+
+    
     renderProducts(data.produtos);
 
-    searchInput.addEventListener("input", function() {
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const btnRender = document.getElementById("btnRender");
+
+    
+    search.addEventListener("input", function() {
       renderProducts(filterProducts());
     });
 
-    categorySelect.addEventListener("change", function() {
+    
+    category.addEventListener("change", function() {
       renderProducts(filterProducts());
     });
 
+   
     btnRender.addEventListener("click", function() {
-      searchInput.value = "";
-      categorySelect.value = "Todas";
+      search.value = "";
+      category.value = "Todas";
       renderProducts(data.produtos);
     });
   }
 
-  // Se for a página de detalhes
   if (document.getElementById("product-details")) {
     showProductDetails();
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", iniciarPagina);
+document.addEventListener(
+  "DOMContentLoaded",
+  iniciarPagina
+);
